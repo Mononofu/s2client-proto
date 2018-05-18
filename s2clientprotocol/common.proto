@@ -11,7 +11,12 @@ message AvailableAbility {
 message ImageData {
   optional int32 bits_per_pixel = 1;    // Number of bits per pixel; 8 bits for a byte etc.
   optional Size2DI size = 2;            // Dimension in pixels.
-  optional bytes data = 3;              // Binary data; the size of this buffer in bytes is width * height * bits_per_pixel / 8.
+
+  // Binary data; the size of this buffer in bytes is width * height * bits_per_pixel / 8.
+  // Data is encoded with x as the minor dimension and y as the major dimension.
+  // As an example, for an image with bits_per_pixel = 8 and size = {x: 4 y: 4},
+  // data[0] is at x=0, y=0; data[1] is at x=1, y=0 and data[4] is at x=0, y=1.
+  optional bytes data = 3;              
 }
 
 // Point on the screen/minimap (e.g., 0..64).
